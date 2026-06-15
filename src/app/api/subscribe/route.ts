@@ -31,14 +31,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Profil invalide.' }, { status: 400 })
   }
 
-  const webhookUrl = process.env.N8N_WEBHOOK_URL
-  if (!webhookUrl) {
-    console.error('N8N_WEBHOOK_URL non configurée')
-    return NextResponse.json(
-      { error: "Le service n'est pas encore configuré. Réessaie plus tard." },
-      { status: 503 }
-    )
-  }
+  // Webhook n8n public (non sensible) : valeur par défaut surchargeable via env.
+  const webhookUrl =
+    process.env.N8N_WEBHOOK_URL ||
+    'https://n8n.maikagency.dev/webhook/ebook-prompt-engineering'
 
   try {
     const res = await fetch(webhookUrl, {
