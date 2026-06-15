@@ -22,6 +22,18 @@ export const BOOK = {
     'Évaluer (et faire évaluer) une réponse avec de vrais critères',
     'Réutiliser des modèles de prompts prêts à l\'emploi (CO-STAR, RTF, CREATE, RACE…)',
   ],
+  // Version condensée des points clés (bande « au programme » du one-pager)
+  highlights: [
+    'Contexte clair',
+    'Objectif précis',
+    'Bon ton',
+    'Zéro réponse floue',
+    'Moins d\'hallucinations',
+    'JSON strict',
+    'Agents IA encadrés',
+    'Évaluer une réponse',
+    'Modèles CO-STAR, RTF…',
+  ],
 }
 
 export const PROFILES = [
