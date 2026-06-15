@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 10, 11;
+  --background-end-rgb: 5, 5, 6;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0b;
+}
+::-webkit-scrollbar-thumb {
+  background: #f59e0b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #fbbf24;
+}
+
+/* Selection */
+::selection {
+  background: rgba(245, 158, 11, 0.4);
+  color: white;
+}
+
+/* Classes utilitaires personnalisées (cohérentes avec le portfolio) */
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  .glass-hover {
+    @apply hover:bg-white/10 hover:border-white/20 transition-all duration-300;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent-400 via-neon-yellow to-neon-orange bg-clip-text text-transparent;
+  }
+  .glow-border {
+    @apply border border-accent-500/30 shadow-glow-sm;
+  }
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-medium rounded-lg
+    hover:from-accent-400 hover:to-accent-500 transition-all duration-300
+    shadow-glow-sm hover:shadow-glow-md transform hover:-translate-y-0.5;
+  }
+  .card {
+    @apply glass rounded-2xl p-6 glass-hover;
+  }
+}
+
+/* Effet de grille futuriste en background */
+.grid-background {
+  background-image:
+    linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Gradient orbs */
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  animation: float 6s ease-in-out infinite;
+}
+.gradient-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.4) 0%, transparent 70%);
+  top: -200px;
+  right: -200px;
+}
+.gradient-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.3) 0%, transparent 70%);
+  bottom: -100px;
+  left: -100px;
+  animation-delay: 2s;
+}
+.gradient-orb-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.2) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Packshot 3D de la couverture */
+.packshot {
+  transform: perspective(1400px) rotateY(-16deg) rotateX(4deg);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.packshot:hover {
+  transform: perspective(1400px) rotateY(-6deg) rotateX(2deg) scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-orb { animation: none; }
+  .packshot { transform: none; }
+}
