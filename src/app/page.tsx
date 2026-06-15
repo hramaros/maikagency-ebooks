@@ -67,7 +67,7 @@ export default function Home() {
             </motion.p>
 
             {/* Formulaire */}
-            <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.2 }} className="max-w-md">
+            <motion.div id="lead-form" {...fadeUp} transition={{ duration: 0.5, delay: 0.2 }} className="max-w-md">
               <LeadForm />
             </motion.div>
           </div>
@@ -164,9 +164,10 @@ export default function Home() {
           <p className="text-dark-300 mb-8">
             Laisse ton email, choisis ton profil, et reçois l&apos;ebook tout de suite.
           </p>
-          <div className="max-w-md mx-auto">
-            <LeadForm />
-          </div>
+          <a href="#lead-form" className="btn-primary inline-flex items-center gap-2">
+            <Sparkles className="w-4 h-4" />
+            Recevoir l&apos;ebook
+          </a>
         </motion.div>
       </section>
 
