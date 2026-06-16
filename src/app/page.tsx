@@ -27,9 +27,9 @@ export default function Home() {
 
       {/* ===== HERO (tout en une vue) ===== */}
       <section className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-12 md:pt-6 md:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
           {/* Colonne gauche : accroche + titre + formulaire */}
-          <div className="order-2 lg:order-1">
+          <div className="order-2 md:order-1">
             <motion.span
               {...fadeUp}
               transition={{ duration: 0.5 }}
@@ -74,7 +74,7 @@ export default function Home() {
           </div>
 
           {/* Colonne droite : packshot de la couverture */}
-          <div className="order-1 lg:order-2 flex justify-center">
+          <div className="order-1 md:order-2 flex justify-center">
             <motion.div
               initial={{ opacity: 0, y: 30, rotateY: -24 }}
               animate={{ opacity: 1, y: 0, rotateY: 0 }}
