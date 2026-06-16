@@ -79,11 +79,11 @@ export default function Home() {
               initial={{ opacity: 0, y: 30, rotateY: -24 }}
               animate={{ opacity: 1, y: 0, rotateY: 0 }}
               transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-              className="relative"
+              className="relative w-full max-w-md md:w-auto"
             >
               {/* Halo lumineux derrière la couverture */}
               <div className="absolute -inset-8 bg-accent-500/20 blur-3xl rounded-full" aria-hidden="true" />
-              <div className="packshot relative w-[230px] sm:w-[280px] lg:w-[340px] rounded-xl overflow-hidden shadow-2xl shadow-accent-500/20 ring-1 ring-white/10">
+              <div className="packshot relative w-full md:w-[280px] lg:w-[340px] rounded-xl overflow-hidden shadow-2xl shadow-accent-500/20 ring-1 ring-white/10">
                 <Image
                   src={BOOK.coverSrc}
                   alt={BOOK.coverAlt}
