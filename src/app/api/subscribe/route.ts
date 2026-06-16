@@ -1,19 +1,22 @@
 import { NextResponse } from 'next/server'
+import { PROFILES, SECTORS } from '@/lib/content'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-const PROFILE_LABELS: Record<string, string> = {
-  etudiant: 'Étudiant',
-  professionnel: 'Professionnel',
-}
+const PROFILE_LABELS: Record<string, string> = Object.fromEntries(
+  PROFILES.map((p) => [p.value, p.label])
+)
+const SECTOR_LABELS: Record<string, string> = Object.fromEntries(
+  SECTORS.map((s) => [s.value, s.label])
+)
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
 export async function POST(req: Request) {
-  let payload: { email?: string; profile?: string }
+  let payload: { email?: string; profile?: string; age?: number | string; sector?: string }
   try {
     payload = await req.json()
   } catch {
@@ -22,6 +25,8 @@ export async function POST(req: Request) {
 
   const email = (payload.email || '').trim()
   const profile = (payload.profile || '').trim()
+  const sector = (payload.sector || '').trim()
+  const age = Number.parseInt(String(payload.age ?? ''), 10)
 
   // Validation serveur (le bouton ne s'active que si valide côté client, on revalide ici)
   if (!isValidEmail(email)) {
@@ -29,6 +34,12 @@ export async function POST(req: Request) {
   }
   if (!PROFILE_LABELS[profile]) {
     return NextResponse.json({ error: 'Profil invalide.' }, { status: 400 })
+  }
+  if (!Number.isInteger(age) || age < 13 || age > 120) {
+    return NextResponse.json({ error: 'Âge invalide.' }, { status: 400 })
+  }
+  if (!SECTOR_LABELS[sector]) {
+    return NextResponse.json({ error: "Secteur d'activité invalide." }, { status: 400 })
   }
 
   // Webhook n8n public (non sensible) : valeur par défaut surchargeable via env.
@@ -44,6 +55,9 @@ export async function POST(req: Request) {
         email,
         profile,
         profileLabel: PROFILE_LABELS[profile],
+        age,
+        sector,
+        sectorLabel: SECTOR_LABELS[sector],
         source: 'landing-ebook-prompt-engineering',
         submittedAt: new Date().toISOString(),
       }),

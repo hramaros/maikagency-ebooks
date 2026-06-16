@@ -2,8 +2,17 @@
 
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Mail, ChevronDown, Loader2, CheckCircle2, ArrowRight, AlertCircle } from 'lucide-react'
-import { PROFILES, type ProfileValue } from '@/lib/content'
+import {
+  Mail,
+  ChevronDown,
+  Loader2,
+  CheckCircle2,
+  ArrowRight,
+  AlertCircle,
+  Calendar,
+  Briefcase,
+} from 'lucide-react'
+import { PROFILES, SECTORS, type ProfileValue, type SectorValue } from '@/lib/content'
 import { isValidEmail, cn } from '@/lib/utils'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
@@ -11,13 +20,18 @@ type Status = 'idle' | 'loading' | 'success' | 'error'
 export default function LeadForm() {
   const [email, setEmail] = useState('')
   const [profile, setProfile] = useState<ProfileValue | ''>('')
+  const [age, setAge] = useState('')
+  const [sector, setSector] = useState<SectorValue | ''>('')
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const [touchedEmail, setTouchedEmail] = useState(false)
+  const [touchedAge, setTouchedAge] = useState(false)
 
-  // Le bouton ne s'active que si email valide ET profil choisi
+  // Le bouton ne s'active que si tous les champs sont valides
   const emailValid = useMemo(() => isValidEmail(email), [email])
-  const isValid = emailValid && profile !== ''
+  const ageNum = parseInt(age, 10)
+  const ageValid = age !== '' && Number.isInteger(ageNum) && ageNum >= 13 && ageNum <= 120
+  const isValid = emailValid && profile !== '' && ageValid && sector !== ''
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -30,7 +44,7 @@ export default function LeadForm() {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), profile }),
+        body: JSON.stringify({ email: email.trim(), profile, age: ageNum, sector }),
       })
 
       if (!res.ok) {
@@ -70,6 +84,7 @@ export default function LeadForm() {
 
   return (
     <form onSubmit={handleSubmit} className="glass glow-border rounded-2xl p-6 sm:p-8 space-y-5" noValidate>
+      {/* Email */}
       <div className="space-y-2">
         <label htmlFor="email" className="block text-sm font-medium text-dark-200">
           Ton adresse email
@@ -100,6 +115,39 @@ export default function LeadForm() {
         )}
       </div>
 
+      {/* Âge */}
+      <div className="space-y-2">
+        <label htmlFor="age" className="block text-sm font-medium text-dark-200">
+          Ton âge
+        </label>
+        <div className="relative">
+          <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400 pointer-events-none" />
+          <input
+            id="age"
+            type="number"
+            inputMode="numeric"
+            min={13}
+            max={120}
+            placeholder="Ex. 28"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            onBlur={() => setTouchedAge(true)}
+            className={cn(
+              'w-full rounded-xl bg-dark-900/70 border pl-12 pr-4 py-3.5 text-white placeholder:text-dark-500',
+              'focus:outline-none focus:ring-2 transition-all duration-200',
+              touchedAge && age && !ageValid
+                ? 'border-red-500/60 focus:ring-red-500/40'
+                : 'border-white/10 focus:border-accent-500 focus:ring-accent-500/30'
+            )}
+            aria-invalid={touchedAge && !!age && !ageValid}
+          />
+        </div>
+        {touchedAge && age && !ageValid && (
+          <p className="text-xs text-red-400">Entre un âge valide (entre 13 et 120).</p>
+        )}
+      </div>
+
+      {/* Profil */}
       <div className="space-y-2">
         <label htmlFor="profile" className="block text-sm font-medium text-dark-200">
           Ton profil
@@ -121,6 +169,36 @@ export default function LeadForm() {
             {PROFILES.map((p) => (
               <option key={p.value} value={p.value} className="text-white bg-dark-900">
                 {p.label}
+              </option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400 pointer-events-none" />
+        </div>
+      </div>
+
+      {/* Secteur d'activité */}
+      <div className="space-y-2">
+        <label htmlFor="sector" className="block text-sm font-medium text-dark-200">
+          Ton secteur d&apos;activité
+        </label>
+        <div className="relative">
+          <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400 pointer-events-none z-10" />
+          <select
+            id="sector"
+            value={sector}
+            onChange={(e) => setSector(e.target.value as SectorValue)}
+            className={cn(
+              'w-full appearance-none rounded-xl bg-dark-900/70 border border-white/10 pl-12 pr-11 py-3.5',
+              'font-mono text-sm focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/30 transition-all duration-200',
+              sector === '' ? 'text-dark-500' : 'text-white'
+            )}
+          >
+            <option value="" disabled>
+              &gt; choisissez votre secteur
+            </option>
+            {SECTORS.map((s) => (
+              <option key={s.value} value={s.value} className="text-white bg-dark-900">
+                {s.label}
               </option>
             ))}
           </select>

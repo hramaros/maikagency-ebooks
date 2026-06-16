@@ -42,3 +42,19 @@ export const PROFILES = [
 ] as const
 
 export type ProfileValue = (typeof PROFILES)[number]['value']
+
+// Secteurs d'activité proposés dans le formulaire (dropdown)
+export const SECTORS = [
+  { value: 'tech', label: 'Tech / Informatique' },
+  { value: 'marketing', label: 'Marketing / Communication' },
+  { value: 'education', label: 'Éducation / Formation' },
+  { value: 'sante', label: 'Santé' },
+  { value: 'finance', label: 'Finance / Assurance' },
+  { value: 'commerce', label: 'Commerce / Vente' },
+  { value: 'industrie', label: 'Industrie / BTP' },
+  { value: 'conseil', label: 'Conseil / Services' },
+  { value: 'medias', label: 'Médias / Création' },
+  { value: 'autre', label: 'Autre' },
+] as const
+
+export type SectorValue = (typeof SECTORS)[number]['value']
