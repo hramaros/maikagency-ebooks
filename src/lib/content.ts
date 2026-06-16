@@ -8,7 +8,7 @@ export const BOOK = {
   subtitle:
     "Le guide qui transforme tes prompts approximatifs en instructions précises, fiables et reproductibles. Maîtrise enfin l'IA au lieu de la subir.",
   // Couverture (packshot). Image hébergée localement (optimisée depuis Drive).
-  coverSrc: '/cover-front.jpg',
+  coverSrc: '/cover-front.png',
   coverAlt: 'Couverture de l\'ebook « Devenir un dieu du prompt engineering »',
   // Ce que le lecteur va apprendre (reformulation simple)
   learn: [

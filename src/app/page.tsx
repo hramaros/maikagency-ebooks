@@ -14,13 +14,6 @@ const fadeUp = {
 export default function Home() {
   return (
     <main className="relative min-h-screen flex flex-col">
-      {/* ===== Barre de marque ===== */}
-      <header className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
-        <span className="font-mono text-sm tracking-tight text-dark-200">
-          <span className="text-accent-400">maik</span>agency
-        </span>
-      </header>
-
       {/* ===== HERO (tout en une vue) ===== */}
       <section className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-1 pb-4 md:pt-2 md:pb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
