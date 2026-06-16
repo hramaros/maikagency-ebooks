@@ -245,10 +245,6 @@ export default function LeadForm() {
           </>
         )}
       </button>
-
-      <p className="text-center text-xs text-dark-500">
-        Reçois-le gratuitement par email. Zéro spam, désinscription en un clic.
-      </p>
     </form>
   )
 }
