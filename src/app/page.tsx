@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Check, Sparkles, Zap } from 'lucide-react'
+import { Check, Sparkles } from 'lucide-react'
 import LeadForm from '@/components/LeadForm'
 import { BOOK } from '@/lib/content'
 
@@ -30,15 +30,6 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
           {/* Colonne gauche : accroche + titre + formulaire */}
           <div className="order-2 md:order-1">
-            <motion.span
-              {...fadeUp}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent-400 bg-accent-500/10 border border-accent-500/20 rounded-full px-3 py-1.5 mb-5"
-            >
-              <Zap className="w-3.5 h-3.5" />
-              Prompt Engineering
-            </motion.span>
-
             {/* Hook percutant */}
             <motion.p
               {...fadeUp}
@@ -83,7 +74,7 @@ export default function Home() {
             >
               {/* Halo lumineux derrière la couverture */}
               <div className="absolute -inset-8 bg-accent-500/20 blur-3xl rounded-full" aria-hidden="true" />
-              <div className="packshot relative w-full md:w-[280px] lg:w-[340px] rounded-xl overflow-hidden shadow-2xl shadow-accent-500/20 ring-1 ring-white/10">
+              <div className="packshot relative w-full md:w-[340px] lg:w-[420px] xl:w-[460px] rounded-xl overflow-hidden shadow-2xl shadow-accent-500/20 ring-1 ring-white/10">
                 <Image
                   src={BOOK.coverSrc}
                   alt={BOOK.coverAlt}
@@ -127,11 +118,10 @@ export default function Home() {
 
       {/* ===== Footer ===== */}
       <footer className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-dark-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-center gap-3 text-sm text-dark-500">
           <span className="font-mono">
             <span className="text-accent-400">maik</span>agency · {new Date().getFullYear()}
           </span>
-          <span>Fait avec ⚡ pour les pros de l&apos;IA</span>
         </div>
       </footer>
     </main>
