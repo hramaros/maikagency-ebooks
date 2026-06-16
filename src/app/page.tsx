@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Check, Sparkles } from 'lucide-react'
+import { Check } from 'lucide-react'
 import LeadForm from '@/components/LeadForm'
 import { BOOK } from '@/lib/content'
 
@@ -19,14 +19,10 @@ export default function Home() {
         <span className="font-mono text-sm tracking-tight text-dark-200">
           <span className="text-accent-400">maik</span>agency
         </span>
-        <span className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-dark-300 glass rounded-full px-3 py-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-accent-400" />
-          Ebook offert
-        </span>
       </header>
 
       {/* ===== HERO (tout en une vue) ===== */}
-      <section className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-12 md:pt-6 md:pb-16">
+      <section className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-1 pb-4 md:pt-2 md:pb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
           {/* Colonne gauche : accroche + titre + formulaire */}
           <div className="order-2 md:order-1">
@@ -34,7 +30,7 @@ export default function Home() {
             <motion.p
               {...fadeUp}
               transition={{ duration: 0.5, delay: 0.05 }}
-              className="text-lg md:text-xl font-medium text-dark-200 mb-3"
+              className="text-base md:text-lg font-medium text-dark-200 mb-2"
             >
               {BOOK.hook}
             </motion.p>
@@ -43,7 +39,7 @@ export default function Home() {
             <motion.h1
               {...fadeUp}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight mb-5"
+              className="text-3xl md:text-4xl xl:text-5xl font-bold leading-tight mb-3"
             >
               Devenir un{' '}
               <span className="gradient-text">dieu du prompt engineering</span>
@@ -53,7 +49,7 @@ export default function Home() {
             <motion.p
               {...fadeUp}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="text-base md:text-lg text-dark-300 leading-relaxed mb-7 max-w-xl"
+              className="text-sm md:text-base text-dark-300 leading-relaxed mb-4 max-w-xl"
             >
               {BOOK.subtitle}
             </motion.p>
@@ -97,7 +93,7 @@ export default function Home() {
         <motion.div
           {...fadeUp}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-10 md:mt-14"
+          className="mt-5 md:mt-7"
         >
           <p className="text-xs font-medium uppercase tracking-wider text-dark-400 mb-3 text-center">
             Au programme

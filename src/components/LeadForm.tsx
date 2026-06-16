@@ -11,6 +11,7 @@ import {
   AlertCircle,
   Calendar,
   Briefcase,
+  User,
 } from 'lucide-react'
 import { PROFILES, SECTORS, type ProfileValue, type SectorValue } from '@/lib/content'
 import { isValidEmail, cn } from '@/lib/utils'
@@ -83,9 +84,9 @@ export default function LeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass glow-border rounded-2xl p-6 sm:p-8 space-y-5" noValidate>
+    <form onSubmit={handleSubmit} className="glass glow-border rounded-2xl p-4 sm:p-6 space-y-3" noValidate>
       {/* Email */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         <label htmlFor="email" className="block text-sm font-medium text-dark-200">
           Ton adresse email
         </label>
@@ -101,7 +102,7 @@ export default function LeadForm() {
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => setTouchedEmail(true)}
             className={cn(
-              'w-full rounded-xl bg-dark-900/70 border pl-12 pr-4 py-3.5 text-white placeholder:text-dark-500',
+              'w-full rounded-xl bg-dark-900/70 border pl-12 pr-4 py-2.5 text-white placeholder:text-dark-500',
               'focus:outline-none focus:ring-2 transition-all duration-200',
               touchedEmail && email && !emailValid
                 ? 'border-red-500/60 focus:ring-red-500/40'
@@ -116,7 +117,7 @@ export default function LeadForm() {
       </div>
 
       {/* Âge */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         <label htmlFor="age" className="block text-sm font-medium text-dark-200">
           Ton âge
         </label>
@@ -133,7 +134,7 @@ export default function LeadForm() {
             onChange={(e) => setAge(e.target.value)}
             onBlur={() => setTouchedAge(true)}
             className={cn(
-              'w-full rounded-xl bg-dark-900/70 border pl-12 pr-4 py-3.5 text-white placeholder:text-dark-500',
+              'w-full rounded-xl bg-dark-900/70 border pl-12 pr-4 py-2.5 text-white placeholder:text-dark-500',
               'focus:outline-none focus:ring-2 transition-all duration-200',
               touchedAge && age && !ageValid
                 ? 'border-red-500/60 focus:ring-red-500/40'
@@ -148,17 +149,18 @@ export default function LeadForm() {
       </div>
 
       {/* Profil */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         <label htmlFor="profile" className="block text-sm font-medium text-dark-200">
           Ton profil
         </label>
         <div className="relative">
+          <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400 pointer-events-none z-10" />
           <select
             id="profile"
             value={profile}
             onChange={(e) => setProfile(e.target.value as ProfileValue)}
             className={cn(
-              'w-full appearance-none rounded-xl bg-dark-900/70 border border-white/10 px-4 py-3.5 pr-11',
+              'w-full appearance-none rounded-xl bg-dark-900/70 border border-white/10 pl-12 pr-11 py-2.5',
               'font-mono text-sm focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/30 transition-all duration-200',
               profile === '' ? 'text-dark-500' : 'text-white'
             )}
@@ -177,7 +179,7 @@ export default function LeadForm() {
       </div>
 
       {/* Secteur d'activité */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         <label htmlFor="sector" className="block text-sm font-medium text-dark-200">
           Ton secteur d&apos;activité
         </label>
@@ -188,7 +190,7 @@ export default function LeadForm() {
             value={sector}
             onChange={(e) => setSector(e.target.value as SectorValue)}
             className={cn(
-              'w-full appearance-none rounded-xl bg-dark-900/70 border border-white/10 pl-12 pr-11 py-3.5',
+              'w-full appearance-none rounded-xl bg-dark-900/70 border border-white/10 pl-12 pr-11 py-2.5',
               'font-mono text-sm focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/30 transition-all duration-200',
               sector === '' ? 'text-dark-500' : 'text-white'
             )}
@@ -225,7 +227,7 @@ export default function LeadForm() {
         type="submit"
         disabled={!isValid || status === 'loading'}
         className={cn(
-          'group w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-semibold transition-all duration-300',
+          'group w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all duration-300',
           isValid && status !== 'loading'
             ? 'bg-gradient-to-r from-accent-500 to-neon-orange text-white shadow-glow-sm hover:shadow-glow-md hover:-translate-y-0.5 cursor-pointer'
             : 'bg-dark-800 text-dark-500 cursor-not-allowed'
