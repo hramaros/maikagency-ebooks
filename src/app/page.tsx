@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import LeadForm from '@/components/LeadForm'
+import BuyMeCoffee from '@/components/BuyMeCoffee'
+import FeedbackForm from '@/components/FeedbackForm'
 import { BOOK } from '@/lib/content'
 
 const fadeUp = {
@@ -103,6 +105,18 @@ export default function Home() {
             ))}
           </ul>
         </motion.div>
+      </section>
+
+      {/* ===== Café + Feedback ===== */}
+      <section className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-10 md:pb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <motion.div {...fadeUp} transition={{ duration: 0.5 }} viewport={{ once: true }} whileInView="animate" initial="initial">
+            <BuyMeCoffee />
+          </motion.div>
+          <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.05 }} viewport={{ once: true }} whileInView="animate" initial="initial">
+            <FeedbackForm />
+          </motion.div>
+        </div>
       </section>
 
       {/* ===== Footer ===== */}

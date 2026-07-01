@@ -58,3 +58,16 @@ export const SECTORS = [
 ] as const
 
 export type SectorValue = (typeof SECTORS)[number]['value']
+
+// Montants proposés pour le soutien "Offre-moi un café" (en euros)
+export const TIP_AMOUNTS = [3, 5, 10] as const
+
+export const COFFEE = {
+  title: 'Cet ebook t\'a aidé ?',
+  subtitle: 'Offre-moi un café pour soutenir la création de contenu gratuit.',
+}
+
+export const FEEDBACK = {
+  title: 'Donne ton avis',
+  subtitle: 'Une remarque, une suggestion ? Ton retour compte pour améliorer l\'ebook.',
+}
